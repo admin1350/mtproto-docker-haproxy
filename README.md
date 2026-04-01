@@ -40,6 +40,27 @@ docker run -d \
   nineseconds/mtg:2 \
   simple-run -n 1.1.1.1 -i prefer-ipv4 0.0.0.0:443 секрет_из_пункта_1.3.1
 ```
+Либо `docker-compose.yml`
+```docker
+version: '3.8'
+
+services:
+  mtproto-proxy:
+    image: nineseconds/mtg:2
+    container_name: mtproto-proxy
+    restart: unless-stopped
+    ports:
+      - "443:443"
+    command: 
+      - simple-run 
+      - "-n" 
+      - "1.1.1.1" 
+      - "-i" 
+      - "prefer-ipv4" 
+      - "0.0.0.0:443" 
+      - "секрет_из_пункта_1.3.1"
+
+```
 P.S: `-p 443:443` порт, на который будет стучатся балансировщик. -p 8888:8888: Внутренний порт статистики (опционально).
 
 ---
